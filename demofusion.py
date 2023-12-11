@@ -81,7 +81,7 @@ class Demofusion:
               cosine_scale_1=3, cosine_scale_2=1, cosine_scale_3=1, sigma=0.8,
               multi_decoder=True, show_image=False#, lowvram=True
              )
-        image=images[1]
+        image=images[len(images)-1]
         image = image.convert("RGB")
         image = np.array(image).astype(np.float32) / 255.0
         image = torch.from_numpy(image)[None,]
