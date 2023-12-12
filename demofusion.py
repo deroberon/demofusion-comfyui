@@ -11,6 +11,7 @@ sys.path.append(my_dir)
 from pipeline_demofusion_sdxl import DemoFusionSDXLPipeline
 sys.path.remove(my_dir)
 
+import folder_paths
 
 class Demofusion:
     def __init__(self):
@@ -20,9 +21,13 @@ class Demofusion:
     def INPUT_TYPES(s):
         return {
             "required": {
+                "ckpt_name": ("STRING", {
+                    "multiline": False, #True if you want the field to look like the one on the ClipTextEncode node
+                    "default": "stabilityai/stable-diffusion-xl-base-1.0"
+                }),
                 "positive": ("STRING", {
                     "multiline": True, #True if you want the field to look like the one on the ClipTextEncode node
-                    "default": "Hello World!"
+                    "default": ""
                 }),
                 "negative": ("STRING", {
                     "multiline": True, #True if you want the field to look like the one on the ClipTextEncode node
@@ -67,9 +72,8 @@ class Demofusion:
     FUNCTION = "execute"
     CATEGORY = "tests"
 
-    def execute(self, positive, negative, width, height, inference_steps, cfg, seed):
-        model_ckpt = "stabilityai/stable-diffusion-xl-base-1.0"
-        pipe = DemoFusionSDXLPipeline.from_pretrained(model_ckpt, torch_dtype=torch.float16)
+    def execute(self, ckpt_name, positive, negative, width, height, inference_steps, cfg, seed):
+        pipe = DemoFusionSDXLPipeline.from_pretrained(ckpt_name, torch_dtype=torch.float16)
         pipe = pipe.to("cuda")
 
         generator = torch.Generator(device='cuda')

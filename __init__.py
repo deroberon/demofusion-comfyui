@@ -37,16 +37,28 @@ def run_script(cmd, cwd='.'):
 
     return process.wait()
 
+try:
+    from .demofusion import NODE_CLASS_MAPPINGS
+except:
+    my_path = os.path.dirname(__file__)
+    requirements_path = os.path.join(my_path, "requirements.txt")
 
-my_path = os.path.dirname(__file__)
-requirements_path = os.path.join(my_path, "requirements.txt")
+    print(f"## Demofusion: installing dependencies")
 
-print(f"## ComfyUI-Manager: installing dependencies")
+    run_script([sys.executable, '-s', '-m', 'pip', 'install', '-r', requirements_path])
 
-run_script([sys.executable, '-s', '-m', 'pip', 'install', '-r', requirements_path])
+    try:
+        from .demofusion import NODE_CLASS_MAPPINGS
+    except:
+        print(f"## [ERROR] Demofusion: Attempting to reinstall dependencies using an alternative method.")
+        run_script([sys.executable, '-s', '-m', 'pip', 'install', '--user', '-r', requirements_path])
 
-from .demofusion import NODE_CLASS_MAPPINGS
+        try:
+            from .demofusion import NODE_CLASS_MAPPINGS
+        except:
+            print(f"## [ERROR] Demofusion: Failed to install the GitPython package in the correct Python environment. Please install it manually in the appropriate environment. (You can seek help at https://app.element.io/#/room/%23comfyui_space%3Amatrix.org)")
 
+    print(f"## Demofusion: installing dependencies done.")
 
 
 __all__ = ['NODE_CLASS_MAPPINGS']
