@@ -22,15 +22,15 @@ class Demofusion:
         return {
             "required": {
                 "ckpt_name": ("STRING", {
-                    "multiline": False, #True if you want the field to look like the one on the ClipTextEncode node
+                    "multiline": False,
                     "default": "stabilityai/stable-diffusion-xl-base-1.0"
                 }),
                 "positive": ("STRING", {
-                    "multiline": True, #True if you want the field to look like the one on the ClipTextEncode node
+                    "multiline": True,
                     "default": ""
                 }),
                 "negative": ("STRING", {
-                    "multiline": True, #True if you want the field to look like the one on the ClipTextEncode node
+                    "multiline": True, 
                     "default": ""
                 }),
                 "width": ("INT", {
@@ -38,32 +38,32 @@ class Demofusion:
                     "min": 2048, #Minimum value
                     "max": 4096, #Maximum value
                     "step": 64, #Slider's step
-                    "display": "number" # Cosmetic only: display as "number" or "slider"
+                    "display": "number" 
                 }),
                 "height": ("INT", {
                     "default": 2048, 
                     "min": 2048, #Minimum value
                     "max": 4096, #Maximum value
                     "step": 64, #Slider's step
-                    "display": "number" # Cosmetic only: display as "number" or "slider"
+                    "display": "number" 
                 }),
                 "inference_steps": ("INT", {
                     "default": 40, 
                     "min": 1, #Minimum value
                     "max": 100, #Maximum value
                     "step": 1, #Slider's step
-                    "display": "number" # Cosmetic only: display as "number" or "slider"
+                    "display": "number" 
                 }),
                 "cfg": ("FLOAT", {
                     "default": 7.5,
                     "min": 1.0,
                     "max": 20.0,
                     "step": 0.5,
-                    "round": 0.001, #The value represeting the precision to round to, will be set to the step value by default. Can be set to False to disable rounding.
+                    "round": 0.001, 
                     "display": "number"}),
                 "seed": ("INT", {
                     "default": 522, 
-                    "display": "number" # Cosmetic only: display as "number" or "slider"
+                    "display": "number" 
                 }),
             },
         }
@@ -83,7 +83,7 @@ class Demofusion:
               height=height, width=width, view_batch_size=4, stride=64,
               num_inference_steps=inference_steps, guidance_scale=cfg,
               cosine_scale_1=3, cosine_scale_2=1, cosine_scale_3=1, sigma=0.8,
-              multi_decoder=True, show_image=False#, lowvram=True
+              multi_decoder=True, show_image=False
              )
         image=images[len(images)-1]
         image = image.convert("RGB")
