@@ -1,0 +1,3089 @@
+{
+  "last_node_id": 84,
+  "last_link_id": 235,
+  "nodes": [
+    {
+      "id": 23,
+      "type": "EmptyLatentImage",
+      "pos": [
+        76.64568822265623,
+        295.661130855713
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            175
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        512,
+        512,
+        1
+      ]
+    },
+    {
+      "id": 2,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        76.64568822265623,
+        531.6611308557129
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            168
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            169
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            177
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "epic-realism.safetensors"
+      ]
+    },
+    {
+      "id": 32,
+      "type": "LoraLoader",
+      "pos": [
+        491.64568822265636,
+        119.66113085571297
+      ],
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 168
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 169
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            172,
+            178,
+            179
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            170,
+            171,
+            180
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoader"
+      },
+      "widgets_values": [
+        "lcm_sd15.safetensors",
+        1,
+        1
+      ]
+    },
+    {
+      "id": 4,
+      "type": "CLIPTextEncode",
+      "pos": [
+        500,
+        442
+      ],
+      "size": [
+        304.0624967578128,
+        109.64216953125026
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 171
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            174,
+            182
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 35,
+      "type": "ToBasicPipe",
+      "pos": [
+        974,
+        119
+      ],
+      "size": {
+        "0": 241.79998779296875,
+        "1": 106
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 179,
+          "slot_index": 0
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 180,
+          "slot_index": 1
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 177,
+          "slot_index": 2
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 192,
+          "slot_index": 3
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 182,
+          "slot_index": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "basic_pipe",
+          "type": "BASIC_PIPE",
+          "links": [
+            186
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ToBasicPipe"
+      }
+    },
+    {
+      "id": 3,
+      "type": "CLIPTextEncode",
+      "pos": [
+        495,
+        292
+      ],
+      "size": [
+        311.6174980468752,
+        107.05781835937523
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 170
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            173,
+            192
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "a man in a cafe"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 60,
+      "type": "Reroute",
+      "pos": [
+        1572,
+        -58
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 186
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "BASIC_PIPE",
+          "links": [
+            189
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 41,
+      "type": "MiDaS-DepthMapPreprocessor",
+      "pos": [
+        1813,
+        528
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 97,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            98
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MiDaS-DepthMapPreprocessor"
+      },
+      "widgets_values": [
+        6.283185307179586,
+        0.1,
+        512
+      ]
+    },
+    {
+      "id": 40,
+      "type": "ControlNetApply",
+      "pos": [
+        2119,
+        331
+      ],
+      "size": {
+        "0": 317.4000244140625,
+        "1": 98
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 190
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 99,
+          "slot_index": 1
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 98
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            191
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetApply"
+      },
+      "widgets_values": [
+        0.25
+      ]
+    },
+    {
+      "id": 42,
+      "type": "ControlNetLoader",
+      "pos": [
+        2130,
+        135
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            99
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "control_sd15_depth.pth"
+      ]
+    },
+    {
+      "id": 22,
+      "type": "KSampler",
+      "pos": [
+        1406.6456882226562,
+        119.66113085571297
+      ],
+      "size": {
+        "0": 315,
+        "1": 474
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 172,
+          "slot_index": 0
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 173,
+          "slot_index": 1
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 174,
+          "slot_index": 2
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 175,
+          "slot_index": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            183,
+            193
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        947679663182103,
+        "fixed",
+        16,
+        1.5,
+        "lcm",
+        "sgm_uniform",
+        1
+      ]
+    },
+    {
+      "id": 65,
+      "type": "Reroute",
+      "pos": [
+        1777,
+        -10
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 193
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "LATENT",
+          "links": [
+            194
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 25,
+      "type": "VAEDecode",
+      "pos": [
+        1880,
+        372
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 183
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 196,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            97
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 64,
+      "type": "EditBasicPipe",
+      "pos": [
+        2478,
+        129
+      ],
+      "size": {
+        "0": 267,
+        "1": 126
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "basic_pipe",
+          "type": "BASIC_PIPE",
+          "link": 232
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": null
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 191
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "basic_pipe",
+          "type": "BASIC_PIPE",
+          "links": [
+            198
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EditBasicPipe"
+      }
+    },
+    {
+      "id": 68,
+      "type": "Reroute",
+      "pos": [
+        2759,
+        -80
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 198
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "BASIC_PIPE",
+          "links": [
+            199
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 66,
+      "type": "Reroute",
+      "pos": [
+        2793,
+        -10
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 194
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "LATENT",
+          "links": [
+            195
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 46,
+      "type": "Latent Upscale by Factor (WAS)",
+      "pos": [
+        2880,
+        141
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 195,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            197
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Latent Upscale by Factor (WAS)"
+      },
+      "widgets_values": [
+        "bilinear",
+        2,
+        "true"
+      ]
+    },
+    {
+      "id": 67,
+      "type": "Reroute",
+      "pos": [
+        3284,
+        -12
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 197
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "LATENT",
+          "links": [
+            200
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 37,
+      "type": "FromBasicPipe_v2",
+      "pos": [
+        3173,
+        -51
+      ],
+      "size": {
+        "0": 267,
+        "1": 126
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "basic_pipe",
+          "type": "BASIC_PIPE",
+          "link": 199,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "basic_pipe",
+          "type": "BASIC_PIPE",
+          "links": [
+            125
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            104
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": [],
+          "shape": 3,
+          "slot_index": 3
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            102,
+            105
+          ],
+          "shape": 3,
+          "slot_index": 4
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            103,
+            106
+          ],
+          "shape": 3,
+          "slot_index": 5
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FromBasicPipe_v2"
+      }
+    },
+    {
+      "id": 1,
+      "type": "Batch Unsampler",
+      "pos": [
+        3326,
+        128
+      ],
+      "size": [
+        335.16957687500053,
+        321.12790622070327
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 178,
+          "slot_index": 0
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 102,
+          "slot_index": 1
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 103,
+          "slot_index": 2
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 200,
+          "slot_index": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent_batch",
+          "type": "LATENT",
+          "links": [
+            107
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Batch Unsampler"
+      },
+      "widgets_values": [
+        30,
+        0,
+        1,
+        1.5,
+        "lcm",
+        "sgm_uniform",
+        "disable"
+      ]
+    },
+    {
+      "id": 43,
+      "type": "Iterative Mixing KSampler",
+      "pos": [
+        3691,
+        134
+      ],
+      "size": {
+        "0": 317.4000244140625,
+        "1": 310
+      },
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 104
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 105
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 106
+        },
+        {
+          "name": "latent_image_batch",
+          "type": "LATENT",
+          "link": 107
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            109
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Iterative Mixing KSampler"
+      },
+      "widgets_values": [
+        229873120776553,
+        "fixed",
+        1.5,
+        "lcm",
+        "sgm_uniform",
+        1,
+        1,
+        0.30000000000000004,
+        true
+      ]
+    },
+    {
+      "id": 28,
+      "type": "LatentFromBatch",
+      "pos": [
+        4107,
+        133
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 109
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            61,
+            202
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "Get the final latent from mixing",
+      "properties": {
+        "Node name for S&R": "LatentFromBatch"
+      },
+      "widgets_values": [
+        30,
+        1
+      ]
+    },
+    {
+      "id": 13,
+      "type": "PreviewImage",
+      "pos": [
+        4448,
+        284
+      ],
+      "size": [
+        288.535003125,
+        328.159656347656
+      ],
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 24
+        }
+      ],
+      "title": "It looks a bit rough",
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 71,
+      "type": "PreviewImage",
+      "pos": [
+        6820.105859374996,
+        265.3437538146974
+      ],
+      "size": {
+        "0": 288.5350036621094,
+        "1": 328.15966796875
+      },
+      "flags": {},
+      "order": 39,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 208
+        }
+      ],
+      "title": "It looks a bit rough",
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 72,
+      "type": "LatentFromBatch",
+      "pos": [
+        6480.105859374996,
+        115.34375381469727
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 36,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 209
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            207,
+            213
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "Get the final latent from mixing",
+      "properties": {
+        "Node name for S&R": "LatentFromBatch"
+      },
+      "widgets_values": [
+        30,
+        1
+      ]
+    },
+    {
+      "id": 75,
+      "type": "Iterative Mixing KSampler",
+      "pos": [
+        6060.105859374996,
+        115.34375381469727
+      ],
+      "size": {
+        "0": 317.4000244140625,
+        "1": 310
+      },
+      "flags": {},
+      "order": 35,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 215
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 216
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 217
+        },
+        {
+          "name": "latent_image_batch",
+          "type": "LATENT",
+          "link": 218
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            209
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Iterative Mixing KSampler"
+      },
+      "widgets_values": [
+        229873120776553,
+        "fixed",
+        1.5,
+        "lcm",
+        "sgm_uniform",
+        1,
+        1,
+        0.30000000000000004,
+        true
+      ]
+    },
+    {
+      "id": 77,
+      "type": "FromBasicPipe_v2",
+      "pos": [
+        6760,
+        -70
+      ],
+      "size": {
+        "0": 267,
+        "1": 126
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "basic_pipe",
+          "type": "BASIC_PIPE",
+          "link": 220
+        }
+      ],
+      "outputs": [
+        {
+          "name": "basic_pipe",
+          "type": "BASIC_PIPE",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            210
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": null,
+          "shape": 3,
+          "slot_index": 2
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": [
+            229,
+            230
+          ],
+          "shape": 3,
+          "slot_index": 3
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            211
+          ],
+          "shape": 3,
+          "slot_index": 4
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            212
+          ],
+          "shape": 3,
+          "slot_index": 5
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FromBasicPipe_v2"
+      }
+    },
+    {
+      "id": 79,
+      "type": "Reroute",
+      "pos": [
+        5670,
+        -30
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 222
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "LATENT",
+          "links": [
+            206
+          ]
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 51,
+      "type": "FromBasicPipe_v2",
+      "pos": [
+        4436,
+        -76
+      ],
+      "size": {
+        "0": 267,
+        "1": 126
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "basic_pipe",
+          "type": "BASIC_PIPE",
+          "link": 125
+        }
+      ],
+      "outputs": [
+        {
+          "name": "basic_pipe",
+          "type": "BASIC_PIPE",
+          "links": [
+            224
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            126
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": null,
+          "shape": 3,
+          "slot_index": 2
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": [
+            231
+          ],
+          "shape": 3,
+          "slot_index": 3
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            128
+          ],
+          "shape": 3,
+          "slot_index": 4
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            129
+          ],
+          "shape": 3,
+          "slot_index": 5
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FromBasicPipe_v2"
+      }
+    },
+    {
+      "id": 80,
+      "type": "Reroute",
+      "pos": [
+        5150,
+        -110
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 224,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "BASIC_PIPE",
+          "links": [
+            214
+          ]
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 76,
+      "type": "Latent Upscale by Factor (WAS)",
+      "pos": [
+        5260.105859374996,
+        125.34375381469727
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 225,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            222
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Latent Upscale by Factor (WAS)"
+      },
+      "widgets_values": [
+        "bilinear",
+        2,
+        "true"
+      ]
+    },
+    {
+      "id": 74,
+      "type": "FromBasicPipe_v2",
+      "pos": [
+        5560,
+        -70
+      ],
+      "size": {
+        "0": 267,
+        "1": 126
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "basic_pipe",
+          "type": "BASIC_PIPE",
+          "link": 214,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "basic_pipe",
+          "type": "BASIC_PIPE",
+          "links": [
+            220
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            215,
+            226
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": [
+            234
+          ],
+          "shape": 3,
+          "slot_index": 3
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            204,
+            216
+          ],
+          "shape": 3,
+          "slot_index": 4
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            205,
+            217
+          ],
+          "shape": 3,
+          "slot_index": 5
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FromBasicPipe_v2"
+      }
+    },
+    {
+      "id": 73,
+      "type": "KSampler",
+      "pos": [
+        7150.105859374996,
+        125.34375381469727
+      ],
+      "size": {
+        "0": 315,
+        "1": 474
+      },
+      "flags": {},
+      "order": 38,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 210
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 211
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 212,
+          "slot_index": 2
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 213
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            227
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "Even lighter additional sampling",
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        1062713514594647,
+        "fixed",
+        8,
+        1.5,
+        "lcm",
+        "sgm_uniform",
+        0.15
+      ]
+    },
+    {
+      "id": 70,
+      "type": "VAEDecode",
+      "pos": [
+        6850,
+        205
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 37,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 207
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 230,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            208
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 12,
+      "type": "VAEDecode",
+      "pos": [
+        4484,
+        220
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 202
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 231,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            24
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 62,
+      "type": "FromBasicPipe_v2",
+      "pos": [
+        1821,
+        133
+      ],
+      "size": {
+        "0": 267,
+        "1": 126
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "basic_pipe",
+          "type": "BASIC_PIPE",
+          "link": 189
+        }
+      ],
+      "outputs": [
+        {
+          "name": "basic_pipe",
+          "type": "BASIC_PIPE",
+          "links": [
+            232
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": [
+            196
+          ],
+          "shape": 3,
+          "slot_index": 3
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            190
+          ],
+          "shape": 3,
+          "slot_index": 4
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FromBasicPipe_v2"
+      }
+    },
+    {
+      "id": 69,
+      "type": "Batch Unsampler",
+      "pos": [
+        5700,
+        115
+      ],
+      "size": {
+        "0": 335.1695861816406,
+        "1": 321.1278991699219
+      },
+      "flags": {},
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 226,
+          "slot_index": 0
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 204,
+          "slot_index": 1
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 205,
+          "slot_index": 2
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 206,
+          "slot_index": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent_batch",
+          "type": "LATENT",
+          "links": [
+            218
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "Batch Unsampler - try half the steps",
+      "properties": {
+        "Node name for S&R": "Batch Unsampler"
+      },
+      "widgets_values": [
+        15,
+        0,
+        1,
+        1.5,
+        "lcm",
+        "sgm_uniform",
+        "disable"
+      ]
+    },
+    {
+      "id": 29,
+      "type": "KSampler",
+      "pos": [
+        4779,
+        137
+      ],
+      "size": {
+        "0": 315,
+        "1": 474
+      },
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 126
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 128
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 129,
+          "slot_index": 2
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 61
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            225,
+            233
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "Light additional sampling",
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        1062713514594647,
+        "fixed",
+        8,
+        1.5,
+        "lcm",
+        "sgm_uniform",
+        0.5
+      ]
+    },
+    {
+      "id": 83,
+      "type": "VAEDecode",
+      "pos": [
+        5265,
+        285
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 233
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 234,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            235
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 84,
+      "type": "PreviewImage",
+      "pos": [
+        5271,
+        376
+      ],
+      "size": [
+        382.41650390625,
+        277.7330627441406
+      ],
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 235
+        }
+      ],
+      "title": "Result of last step",
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 81,
+      "type": "VAEDecode",
+      "pos": [
+        7563,
+        97
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 40,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 227
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 229,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            228
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 82,
+      "type": "PreviewImage",
+      "pos": [
+        7822,
+        72
+      ],
+      "size": [
+        742.0979687500012,
+        634.796306152344
+      ],
+      "flags": {},
+      "order": 41,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 228
+        }
+      ],
+      "title": "Final 4x Output",
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    }
+  ],
+  "links": [
+    [
+      24,
+      12,
+      0,
+      13,
+      0,
+      "IMAGE"
+    ],
+    [
+      61,
+      28,
+      0,
+      29,
+      3,
+      "LATENT"
+    ],
+    [
+      97,
+      25,
+      0,
+      41,
+      0,
+      "IMAGE"
+    ],
+    [
+      98,
+      41,
+      0,
+      40,
+      2,
+      "IMAGE"
+    ],
+    [
+      99,
+      42,
+      0,
+      40,
+      1,
+      "CONTROL_NET"
+    ],
+    [
+      102,
+      37,
+      4,
+      1,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      103,
+      37,
+      5,
+      1,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      104,
+      37,
+      1,
+      43,
+      0,
+      "MODEL"
+    ],
+    [
+      105,
+      37,
+      4,
+      43,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      106,
+      37,
+      5,
+      43,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      107,
+      1,
+      0,
+      43,
+      3,
+      "LATENT"
+    ],
+    [
+      109,
+      43,
+      0,
+      28,
+      0,
+      "LATENT"
+    ],
+    [
+      125,
+      37,
+      0,
+      51,
+      0,
+      "BASIC_PIPE"
+    ],
+    [
+      126,
+      51,
+      1,
+      29,
+      0,
+      "MODEL"
+    ],
+    [
+      128,
+      51,
+      4,
+      29,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      129,
+      51,
+      5,
+      29,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      168,
+      2,
+      0,
+      32,
+      0,
+      "MODEL"
+    ],
+    [
+      169,
+      2,
+      1,
+      32,
+      1,
+      "CLIP"
+    ],
+    [
+      170,
+      32,
+      1,
+      3,
+      0,
+      "CLIP"
+    ],
+    [
+      171,
+      32,
+      1,
+      4,
+      0,
+      "CLIP"
+    ],
+    [
+      172,
+      32,
+      0,
+      22,
+      0,
+      "MODEL"
+    ],
+    [
+      173,
+      3,
+      0,
+      22,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      174,
+      4,
+      0,
+      22,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      175,
+      23,
+      0,
+      22,
+      3,
+      "LATENT"
+    ],
+    [
+      177,
+      2,
+      2,
+      35,
+      2,
+      "VAE"
+    ],
+    [
+      178,
+      32,
+      0,
+      1,
+      0,
+      "MODEL"
+    ],
+    [
+      179,
+      32,
+      0,
+      35,
+      0,
+      "MODEL"
+    ],
+    [
+      180,
+      32,
+      1,
+      35,
+      1,
+      "CLIP"
+    ],
+    [
+      182,
+      4,
+      0,
+      35,
+      4,
+      "CONDITIONING"
+    ],
+    [
+      183,
+      22,
+      0,
+      25,
+      0,
+      "LATENT"
+    ],
+    [
+      186,
+      35,
+      0,
+      60,
+      0,
+      "*"
+    ],
+    [
+      189,
+      60,
+      0,
+      62,
+      0,
+      "BASIC_PIPE"
+    ],
+    [
+      190,
+      62,
+      4,
+      40,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      191,
+      40,
+      0,
+      64,
+      4,
+      "CONDITIONING"
+    ],
+    [
+      192,
+      3,
+      0,
+      35,
+      3,
+      "CONDITIONING"
+    ],
+    [
+      193,
+      22,
+      0,
+      65,
+      0,
+      "*"
+    ],
+    [
+      194,
+      65,
+      0,
+      66,
+      0,
+      "*"
+    ],
+    [
+      195,
+      66,
+      0,
+      46,
+      0,
+      "LATENT"
+    ],
+    [
+      196,
+      62,
+      3,
+      25,
+      1,
+      "VAE"
+    ],
+    [
+      197,
+      46,
+      0,
+      67,
+      0,
+      "*"
+    ],
+    [
+      198,
+      64,
+      0,
+      68,
+      0,
+      "*"
+    ],
+    [
+      199,
+      68,
+      0,
+      37,
+      0,
+      "BASIC_PIPE"
+    ],
+    [
+      200,
+      67,
+      0,
+      1,
+      3,
+      "LATENT"
+    ],
+    [
+      202,
+      28,
+      0,
+      12,
+      0,
+      "LATENT"
+    ],
+    [
+      204,
+      74,
+      4,
+      69,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      205,
+      74,
+      5,
+      69,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      206,
+      79,
+      0,
+      69,
+      3,
+      "LATENT"
+    ],
+    [
+      207,
+      72,
+      0,
+      70,
+      0,
+      "LATENT"
+    ],
+    [
+      208,
+      70,
+      0,
+      71,
+      0,
+      "IMAGE"
+    ],
+    [
+      209,
+      75,
+      0,
+      72,
+      0,
+      "LATENT"
+    ],
+    [
+      210,
+      77,
+      1,
+      73,
+      0,
+      "MODEL"
+    ],
+    [
+      211,
+      77,
+      4,
+      73,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      212,
+      77,
+      5,
+      73,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      213,
+      72,
+      0,
+      73,
+      3,
+      "LATENT"
+    ],
+    [
+      214,
+      80,
+      0,
+      74,
+      0,
+      "BASIC_PIPE"
+    ],
+    [
+      215,
+      74,
+      1,
+      75,
+      0,
+      "MODEL"
+    ],
+    [
+      216,
+      74,
+      4,
+      75,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      217,
+      74,
+      5,
+      75,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      218,
+      69,
+      0,
+      75,
+      3,
+      "LATENT"
+    ],
+    [
+      220,
+      74,
+      0,
+      77,
+      0,
+      "BASIC_PIPE"
+    ],
+    [
+      222,
+      76,
+      0,
+      79,
+      0,
+      "*"
+    ],
+    [
+      224,
+      51,
+      0,
+      80,
+      0,
+      "*"
+    ],
+    [
+      225,
+      29,
+      0,
+      76,
+      0,
+      "LATENT"
+    ],
+    [
+      226,
+      74,
+      1,
+      69,
+      0,
+      "MODEL"
+    ],
+    [
+      227,
+      73,
+      0,
+      81,
+      0,
+      "LATENT"
+    ],
+    [
+      228,
+      81,
+      0,
+      82,
+      0,
+      "IMAGE"
+    ],
+    [
+      229,
+      77,
+      3,
+      81,
+      1,
+      "VAE"
+    ],
+    [
+      230,
+      77,
+      3,
+      70,
+      1,
+      "VAE"
+    ],
+    [
+      231,
+      51,
+      3,
+      12,
+      1,
+      "VAE"
+    ],
+    [
+      232,
+      62,
+      0,
+      64,
+      0,
+      "BASIC_PIPE"
+    ],
+    [
+      233,
+      29,
+      0,
+      83,
+      0,
+      "LATENT"
+    ],
+    [
+      234,
+      74,
+      3,
+      83,
+      1,
+      "VAE"
+    ],
+    [
+      235,
+      83,
+      0,
+      84,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Create an image at low resolution using any sampler",
+      "bounding": [
+        67,
+        46,
+        1665,
+        614
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Apply one or more ControlNets",
+      "bounding": [
+        1769,
+        45,
+        998,
+        617
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Upscale latents by 2x",
+      "bounding": [
+        2791,
+        42,
+        478,
+        619
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Unsample the 2x upscale and then de-noise again",
+      "bounding": [
+        3290,
+        42,
+        774,
+        620
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "De-noise lightly for a few more steps",
+      "bounding": [
+        4074,
+        43,
+        1136,
+        620
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Double scale and go through this all again",
+      "bounding": [
+        5240,
+        41,
+        2241,
+        630
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "groupNodes": {
+      "Generate an image any way you want at low resolution": {
+        "nodes": [
+          {
+            "type": "EmptyLatentImage",
+            "pos": [
+              100,
+              306
+            ],
+            "size": {
+              "0": 315,
+              "1": 106
+            },
+            "flags": {},
+            "order": 0,
+            "mode": 0,
+            "outputs": [
+              {
+                "name": "LATENT",
+                "type": "LATENT",
+                "links": [],
+                "shape": 3
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "EmptyLatentImage"
+            },
+            "widgets_values": [
+              512,
+              512,
+              1
+            ],
+            "index": 0
+          },
+          {
+            "type": "CheckpointLoaderSimple",
+            "pos": [
+              100,
+              542
+            ],
+            "size": {
+              "0": 315,
+              "1": 98
+            },
+            "flags": {},
+            "order": 1,
+            "mode": 0,
+            "outputs": [
+              {
+                "name": "MODEL",
+                "type": "MODEL",
+                "links": [],
+                "shape": 3,
+                "slot_index": 0
+              },
+              {
+                "name": "CLIP",
+                "type": "CLIP",
+                "links": [],
+                "shape": 3,
+                "slot_index": 1
+              },
+              {
+                "name": "VAE",
+                "type": "VAE",
+                "links": [],
+                "shape": 3
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "CheckpointLoaderSimple"
+            },
+            "widgets_values": [
+              "epic-realism.safetensors"
+            ],
+            "index": 1
+          },
+          {
+            "type": "LoraLoader",
+            "pos": [
+              515,
+              130
+            ],
+            "size": {
+              "0": 315,
+              "1": 126
+            },
+            "flags": {},
+            "order": 3,
+            "mode": 0,
+            "inputs": [
+              {
+                "name": "model",
+                "type": "MODEL",
+                "link": null
+              },
+              {
+                "name": "clip",
+                "type": "CLIP",
+                "link": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "MODEL",
+                "type": "MODEL",
+                "links": [],
+                "shape": 3,
+                "slot_index": 0
+              },
+              {
+                "name": "CLIP",
+                "type": "CLIP",
+                "links": [],
+                "shape": 3,
+                "slot_index": 1
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "LoraLoader"
+            },
+            "widgets_values": [
+              "lcm_sd15.safetensors",
+              1,
+              1
+            ],
+            "index": 2
+          },
+          {
+            "type": "CLIPTextEncode",
+            "pos": [
+              930,
+              130
+            ],
+            "size": {
+              "0": 400,
+              "1": 200
+            },
+            "flags": {},
+            "order": 4,
+            "mode": 0,
+            "inputs": [
+              {
+                "name": "clip",
+                "type": "CLIP",
+                "link": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "CONDITIONING",
+                "type": "CONDITIONING",
+                "links": [],
+                "shape": 3,
+                "slot_index": 0
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "CLIPTextEncode"
+            },
+            "widgets_values": [
+              "a man in a cafe"
+            ],
+            "color": "#232",
+            "bgcolor": "#353",
+            "index": 3
+          },
+          {
+            "type": "CLIPTextEncode",
+            "pos": [
+              930,
+              460
+            ],
+            "size": {
+              "0": 400,
+              "1": 200
+            },
+            "flags": {},
+            "order": 5,
+            "mode": 0,
+            "inputs": [
+              {
+                "name": "clip",
+                "type": "CLIP",
+                "link": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "CONDITIONING",
+                "type": "CONDITIONING",
+                "links": [],
+                "shape": 3,
+                "slot_index": 0
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "CLIPTextEncode"
+            },
+            "widgets_values": [
+              ""
+            ],
+            "color": "#322",
+            "bgcolor": "#533",
+            "index": 4
+          },
+          {
+            "type": "KSampler",
+            "pos": [
+              1430,
+              130
+            ],
+            "size": {
+              "0": 315,
+              "1": 474
+            },
+            "flags": {},
+            "order": 6,
+            "mode": 0,
+            "inputs": [
+              {
+                "name": "model",
+                "type": "MODEL",
+                "link": null,
+                "slot_index": 0
+              },
+              {
+                "name": "positive",
+                "type": "CONDITIONING",
+                "link": null,
+                "slot_index": 1
+              },
+              {
+                "name": "negative",
+                "type": "CONDITIONING",
+                "link": null,
+                "slot_index": 2
+              },
+              {
+                "name": "latent_image",
+                "type": "LATENT",
+                "link": null,
+                "slot_index": 3
+              }
+            ],
+            "outputs": [
+              {
+                "name": "LATENT",
+                "type": "LATENT",
+                "links": [],
+                "shape": 3,
+                "slot_index": 0
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "KSampler"
+            },
+            "widgets_values": [
+              947679663182103,
+              "fixed",
+              16,
+              1.5,
+              "lcm",
+              "sgm_uniform",
+              1
+            ],
+            "index": 5
+          }
+        ],
+        "links": [
+          [
+            1,
+            0,
+            2,
+            0,
+            2,
+            "MODEL"
+          ],
+          [
+            1,
+            1,
+            2,
+            1,
+            2,
+            "CLIP"
+          ],
+          [
+            2,
+            1,
+            3,
+            0,
+            32,
+            "CLIP"
+          ],
+          [
+            2,
+            1,
+            4,
+            0,
+            32,
+            "CLIP"
+          ],
+          [
+            2,
+            0,
+            5,
+            0,
+            32,
+            "MODEL"
+          ],
+          [
+            3,
+            0,
+            5,
+            1,
+            3,
+            "CONDITIONING"
+          ],
+          [
+            4,
+            0,
+            5,
+            2,
+            4,
+            "CONDITIONING"
+          ],
+          [
+            0,
+            0,
+            5,
+            3,
+            23,
+            "LATENT"
+          ]
+        ],
+        "external": [
+          [
+            1,
+            2,
+            "VAE"
+          ],
+          [
+            2,
+            0,
+            "MODEL"
+          ],
+          [
+            2,
+            1,
+            "CLIP"
+          ],
+          [
+            3,
+            0,
+            "CONDITIONING"
+          ],
+          [
+            4,
+            0,
+            "CONDITIONING"
+          ],
+          [
+            5,
+            0,
+            "LATENT"
+          ]
+        ]
+      }
+    }
+  },
+  "version": 0.4
+}
