@@ -103,8 +103,9 @@ def rescale_noise_cfg(noise_cfg, noise_pred_text, guidance_rescale=0.0):
     noise_cfg = guidance_rescale * noise_pred_rescaled + (1 - guidance_rescale) * noise_cfg
     return noise_cfg
 
-
-class DemoFusionSDXLPipeline(DiffusionPipeline, FromSingleFileMixin, LoraLoaderMixin, TextualInversionLoaderMixin):
+## Have to change the name to contain the word "StableDiffusion" because of:
+## https://github.com/huggingface/diffusers/blob/2d94c7838e273c40920ffd6d24d724357add7f2d/src/diffusers/loaders/single_file.py#L207C15-L207C30
+class DemoFusionSDXLStableDiffusionPipeline(DiffusionPipeline, FromSingleFileMixin, LoraLoaderMixin, TextualInversionLoaderMixin):
     r"""
     Pipeline for text-to-image generation using Stable Diffusion XL.
 
