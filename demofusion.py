@@ -19,8 +19,12 @@ sys.path.append(my_dir)
 from pipeline_demofusion_sdxl import DemoFusionSDXLStableDiffusionPipeline
 sys.path.remove(my_dir)
 
+custom_nodes_dir = os.path.abspath(os.path.join(my_dir, '..'))
+comfy_dir = os.path.abspath(os.path.join(my_dir, '..', '..'))
+sys.path.append(comfy_dir)
 import folder_paths
-
+sys.path.remove(comfy_dir)
+ 
 
 class Demofusion:
     def __init__(self):
@@ -109,10 +113,7 @@ class DemofusionFromSingleFile:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "file_name": ("STRING", {
-                    "multiline": False,
-                    "default": "https://huggingface.co/Lykon/DreamShaper/blob/main/DreamShaperXL1.0Alpha2_fixedVae_half_00001_.safetensors"
-                }),
+                "ckpt_name": (folder_paths.get_filename_list("checkpoints"), ),
                 "positive": ("STRING", {
                     "multiline": True,
                     "default": ""
@@ -160,8 +161,9 @@ class DemofusionFromSingleFile:
     FUNCTION = "execute"
     CATEGORY = "tests"
 
-    def execute(self, file_name, positive, negative, width, height, inference_steps, cfg, seed):
-        pipe = DemoFusionSDXLStableDiffusionPipeline.from_single_file(file_name, torch_dtype=torch.float16, use_safetensors=True)
+    def execute(self, ckpt_name, positive, negative, width, height, inference_steps, cfg, seed):
+        ckpt_path = folder_paths.get_full_path("checkpoints", ckpt_name)
+        pipe = DemoFusionSDXLStableDiffusionPipeline.from_single_file(ckpt_path, torch_dtype=torch.float16, use_safetensors=True)
         pipe = pipe.to("cuda")
 
         generator = torch.Generator(device='cuda')

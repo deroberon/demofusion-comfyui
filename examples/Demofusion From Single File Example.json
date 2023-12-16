@@ -1,13 +1,38 @@
 {
-  "last_node_id": 3,
-  "last_link_id": 2,
+  "last_node_id": 4,
+  "last_link_id": 3,
   "nodes": [
     {
-      "id": 3,
+      "id": 2,
+      "type": "PreviewImage",
+      "pos": [
+        1238,
+        289
+      ],
+      "size": [
+        555.3333740234375,
+        579.888916015625
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 4,
       "type": "Demofusion From Single File",
       "pos": [
-        876.6666870117188,
-        146.6666717529297
+        617,
+        282
       ],
       "size": {
         "0": 400,
@@ -21,7 +46,7 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            2
+            3
           ],
           "shape": 3,
           "slot_index": 0
@@ -31,47 +56,22 @@
         "Node name for S&R": "Demofusion From Single File"
       },
       "widgets_values": [
-        "https://huggingface.co/Lykon/DreamShaper/blob/main/DreamShaperXL1.0Alpha2_fixedVae_half_00001_.safetensors",
-        "a man in a cafe",
+        "SDXL_1.0_MOHAWK_v18.safetensors",
+        "A photo of a man in a cafe.",
         "",
         2048,
         2048,
         30,
         7.5,
-        213,
+        1537,
         "randomize"
       ]
-    },
-    {
-      "id": 2,
-      "type": "PreviewImage",
-      "pos": [
-        1380,
-        121
-      ],
-      "size": [
-        644.4444580078125,
-        656.666748046875
-      ],
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 2
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "PreviewImage"
-      }
     }
   ],
   "links": [
     [
-      2,
       3,
+      4,
       0,
       2,
       0,

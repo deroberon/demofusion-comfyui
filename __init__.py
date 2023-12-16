@@ -3,6 +3,7 @@ import subprocess
 import threading
 import sys
 import locale
+import traceback 
 
 
 def handle_stream(stream, prefix):
@@ -57,6 +58,7 @@ except:
             from .demofusion import NODE_CLASS_MAPPINGS
         except:
             print(f"## [ERROR] Demofusion: Failed to install the GitPython package in the correct Python environment. Please install it manually in the appropriate environment. (You can seek help at https://app.element.io/#/room/%23comfyui_space%3Amatrix.org)")
+            traceback.print_exc()
 
     print(f"## Demofusion: installing dependencies done.")
 
