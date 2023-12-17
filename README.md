@@ -12,8 +12,7 @@ My idea was wrapping Demofusion in a node to be used in ComfyUI, so we could use
 
 As it it my first ComfyUI custom node, I'm not sure if I'm implementing the best practices, so any comments and/or sugestions are welcome.
 
-I also would like to implement other features but I was not able to figure out how to do them yet: 
-- To use safetensors local files and not only Hugging Face models, but I was not able yet to integrate the models used in diffusers python library with the ones used in Comfyui nodes.
+**Update:** Now you can also use local SDXL checkpoints! 
 
 If anyone have some ideas about how to do it, again, thank you very much for yor collaboration and tips.
 
